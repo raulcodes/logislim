@@ -24,7 +24,7 @@ func AllDevicesOFF(cmd *cobra.Command, args []string, brightness, temperature in
 
 func AllDevicesAction(fn func(d *hid.Device, b, t int) error, brightness, temperature int) {
 	devices := map[uint16]*hid.DeviceInfo{}
-	hid.Enumerate(uint16(VENDOR_ID), hid.ProductIDAny, func(info *hid.DeviceInfo) error {
+	hid.Enumerate(uint16(VENDOR_ID), PRODUCT_ID, func(info *hid.DeviceInfo) error {
 		devices[info.ProductID] = info
 		return nil
 	})
@@ -113,10 +113,9 @@ func adjustTemperature(temp int) (first, second byte) {
 	}
 
 	buf := new(bytes.Buffer)
-	binary.Write(buf, binary.BigEndian, temp)
+	binary.Write(buf, binary.BigEndian, int16(temp))
 	first, _ = buf.ReadByte()
 	second, _ = buf.ReadByte()
 
 	return first, second
-	// return []byte{0x11, 0xff, 0x04, 0x9c, byte0, byte1, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 }

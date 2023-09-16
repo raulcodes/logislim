@@ -20,6 +20,6 @@ var onCmd = &cobra.Command{
 
 func init() {
 	onCmd.PersistentFlags().IntVarP(&brightness, "brightness", "b", 80, "set brightness (1 - 100)")
-	onCmd.PersistentFlags().IntVarP(&temperature, "temperature", "t", 2700, "set temperature (2700K - 6500K)")
+	onCmd.PersistentFlags().IntVarP(&temperature, "temperature", "t", 2700, "set temperature (2700 - 6500)")
 	rootCmd.AddCommand(onCmd)
 }
