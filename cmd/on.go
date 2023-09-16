@@ -6,6 +6,7 @@ import (
 )
 
 var brightness int
+var temperature int
 
 // onCmd represents the on command
 var onCmd = &cobra.Command{
@@ -13,11 +14,12 @@ var onCmd = &cobra.Command{
 	Short: "Turns on all available Litra Glow lights",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		lib.AllDevicesON(cmd, args, brightness)
+		lib.AllDevicesON(cmd, args, brightness, temperature)
 	},
 }
 
 func init() {
-	onCmd.PersistentFlags().IntVarP(&brightness, "brightness", "b", 80, "set brightness (1-100)")
+	onCmd.PersistentFlags().IntVarP(&brightness, "brightness", "b", 80, "set brightness (1 - 100)")
+	onCmd.PersistentFlags().IntVarP(&temperature, "temperature", "t", 2700, "set temperature (2700K - 6500K)")
 	rootCmd.AddCommand(onCmd)
 }

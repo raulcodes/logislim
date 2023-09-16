@@ -11,7 +11,7 @@ var offCmd = &cobra.Command{
 	Short: "Turns off all available Litra Glow lights",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		lib.AllDevicesOFF(cmd, args, brightness)
+		lib.AllDevicesOFF(cmd, args, brightness, temperature)
 	},
 }
 
